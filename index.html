@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+    <script defer src="js/script.js"></script>
+
+    <title>Frontend Mentor | Tip Calculator App</title>
+  </head>
+  <body>
+    <div class="container">
+      <img
+        src="./images/logo.svg"
+        alt=""
+        aria-hidden="true"
+        class="calc__logo"
+      />
+      <main class="calc">
+        <div class="calc__input-container">
+          <form action="#" class="calc__form calc__form--bill">
+            <div class="calc__form-texts">
+              <label for="bill" class="calc__heading">Bill</label>
+              <p class="calc__error-text"></p>
+            </div>
+
+            <input
+              type="text"
+              name="bill"
+              placeholder="0"
+              id="name"
+              class="calc__input js-input"
+              required
+            />
+          </form>
+
+          <div class="calc__tips">
+            <p class="calc__heading">Select Tip %</p>
+            <ul class="calc__list">
+              <li class="calc__item">
+                <a href="#" class="calc__tip js-percentage">5%</a>
+              </li>
+              <li class="calc__item">
+                <a href="#" class="calc__tip js-percentage">10%</a>
+              </li>
+              <li class="calc__item">
+                <a href="#" class="calc__tip js-percentage">15%</a>
+              </li>
+              <li class="calc__item">
+                <a href="#" class="calc__tip js-percentage">25%</a>
+              </li>
+              <li class="calc__item">
+                <a href="#" class="calc__tip js-percentage">50%</a>
+              </li>
+              <li class="calc__item">
+                <form action="#" class="calc__form calc__form--custom">
+                  <input
+                    type="text"
+                    name="custom"
+                    placeholder="Custom"
+                    id="custom"
+                    class="calc__input js-input"
+                    required
+                  />
+                </form>
+              </li>
+            </ul>
+          </div>
+
+          <form action="#" class="calc__form calc__form--nop">
+            <div class="calc__form-texts">
+              <label for="number of people" class="calc__heading">
+                Number of People
+              </label>
+              <p class="calc__error-text"></p>
+            </div>
+            <input
+              type="text"
+              name="number of people"
+              placeholder="0"
+              id="nop"
+              class="calc__input js-input"
+              required
+            />
+          </form>
+        </div>
+        <div class="calc__output-container">
+          <div class="calc__output-headings">
+            <div class="calc__wrapper">
+              <div class="calc__amount-headings">
+                <p class="calc__heading calc__heading--tip">Tip Amount</p>
+                <p class="calc__heading calc__heading--person">/ person</p>
+              </div>
+              <p class="calc__number js-number">$0.00</p>
+            </div>
+
+            <div class="calc__wrapper">
+              <div class="calc__amount-headings">
+                <p class="calc__heading calc__heading--tip">Total</p>
+                <p class="calc__heading calc__heading--person">/ person</p>
+              </div>
+              <p class="calc__number js-number">$0.00</p>
+            </div>
+          </div>
+          <button
+            type="reset"
+            value="Reset"
+            class="calc__reset js-reset"
+            disabled
+          >
+            Reset
+          </button>
+        </div>
+      </main>
+    </div>
+
+    <footer class="attribution">
+      Challenge by
+      <a
+        class="attribution__link"
+        href="https://www.frontendmentor.io?ref=challenge"
+        target="_blank"
+        >Frontend Mentor</a
+      >. Coded by
+      <a
+        class="attribution__link"
+        href="https://github.com/kens-visuals"
+        target="_blank"
+        >Kens-Visuals</a
+      >.
+    </footer>
+  </body>
+</html>

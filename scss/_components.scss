@@ -1,0 +1,258 @@
+.calc {
+  width: 100%;
+  background-color: $color-secondary--light;
+  padding: 4rem 2.5rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  box-shadow: rgba($color-primary, 0.25) 0px 15px 40px -5px;
+
+  @media (min-width: 810px) {
+    border-radius: 2rem;
+  }
+
+  @media (min-width: 1140px) {
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+  }
+
+  &__logo {
+    width: 8.5rem;
+    margin-top: 4rem;
+
+    @media (min-width: 1140px) {
+      margin-top: 0;
+    }
+  }
+
+  &__input-container {
+    padding-inline: 1rem;
+
+    & > * {
+      margin-bottom: 4rem;
+    }
+
+    @media (min-width: 1140px) {
+      flex: 0 1 50%;
+      padding: 1.5rem;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 60%;
+      left: 5%;
+    }
+
+    &-texts {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &--bill {
+      &::before {
+        content: url('../images/icon-dollar.svg');
+      }
+    }
+
+    &--nop {
+      &::before {
+        content: url('../images/icon-person.svg');
+      }
+
+      @media (min-width: 1140px) {
+        margin-bottom: 0;
+      }
+    }
+
+    &--custom {
+      width: 100%;
+
+      & input {
+        color: $color-primary;
+        padding-block: 0.8rem;
+      }
+    }
+  }
+
+  &__heading {
+    margin-bottom: 1rem;
+
+    &--tip {
+      color: $color-secondary;
+      margin-bottom: 0;
+      font-size: 1.8rem;
+
+      @media (min-width: 1140px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    &--person {
+      color: $color-primary--light;
+      margin-bottom: 0;
+      font-size: 1.2rem;
+    }
+  }
+
+  &__error-text {
+    color: $color-error;
+  }
+
+  &__error-input {
+    outline: 0.2rem solid $color-error;
+  }
+
+  &__input {
+    width: 100%;
+    color: $color-primary;
+    background-color: $color-secondary--dark;
+    font-size: 2.3rem;
+    text-align: right;
+    border-radius: 0.2rem;
+    border: 0;
+    padding: 0.5rem 2rem;
+
+    &:focus-visible {
+      cursor: pointer;
+      outline: 0.2rem solid $color-success;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 5rem);
+    grid-gap: 1.7rem;
+
+    @media (min-width: 810px) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 5rem);
+      grid-gap: 1.5rem 1.4rem;
+    }
+  }
+
+  &__item {
+    background-color: $color-primary;
+    border-radius: 0.5rem;
+    padding-block: 0.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.4s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-hover;
+
+      .calc__tip {
+        color: $color-primary;
+      }
+    }
+
+    &--active {
+      background-color: $color-success;
+
+      .calc__tip {
+        color: $color-primary;
+      }
+    }
+  }
+
+  &__tip {
+    color: $color-secondary;
+    font-size: 2.5rem;
+    text-decoration: none;
+    transition: color 0.4s;
+  }
+
+  &__output-container {
+    background-color: $color-primary;
+    border-radius: 1.5rem;
+    padding: 4rem 2rem 3rem 2rem;
+
+    @media (min-width: 1140px) {
+      padding: 4rem;
+      flex: 0 1 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    @media (min-width: 1140px) {
+      margin-bottom: 3rem;
+    }
+  }
+
+  &__number {
+    color: $color-success;
+    font-size: 3rem;
+
+    @media (min-width: 1140px) {
+      font-size: 4.5rem;
+    }
+  }
+
+  &__reset {
+    width: 100%;
+    color: $color-primary;
+    background-color: $color-success;
+    border-radius: 0.5rem;
+    border: 0;
+    font-size: 2rem;
+    text-transform: uppercase;
+    padding-block: 1rem;
+    transition: background-color 0.2s ease-out;
+
+    &:hover:enabled {
+      cursor: pointer;
+      background-color: $color-hover;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+    }
+  }
+}
+
+.attribution {
+  width: 100%;
+  max-width: 90rem;
+  background-color: $color-secondary--light;
+  font-size: 1rem;
+  text-align: center;
+  padding-bottom: 1rem;
+
+  @media (min-width: 810px) {
+    background-color: unset;
+    margin-block: 1rem;
+    padding-bottom: 0;
+  }
+
+  &__link:link,
+  &__link:visited {
+    text-transform: uppercase;
+    color: $color-primary;
+    transition: all 0.2s;
+  }
+
+  &__link:hover,
+  &__link:active {
+    color: $color-primary--light;
+  }
+}

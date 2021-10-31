@@ -1,0 +1,63 @@
+$color-primary: hsl(183, 100%, 15%);
+$color-primary--dark: hsl(186, 14%, 43%);
+$color-primary--light: hsl(184, 14%, 56%);
+$color-secondary: hsl(185, 41%, 84%);
+$color-secondary--dark: hsl(189, 41%, 97%);
+$color-secondary--light: hsl(0, 0%, 100%);
+$color-success: hsl(172, 67%, 45%);
+$color-error: hsl(10, 44%, 59%);
+$color-hover: hsl(173, 61%, 77%);
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  color: $color-primary--light;
+  background-color: $color-secondary;
+  font-family: 'Space Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-rendering: optimizeSpeed;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+}

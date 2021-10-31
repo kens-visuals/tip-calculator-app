@@ -1,0 +1,15 @@
+.container {
+  width: 100%;
+  max-width: 89rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+
+  @media (min-width: 1140px) {
+    gap: 8rem;
+    margin-bottom: 5rem;
+  }
+}
