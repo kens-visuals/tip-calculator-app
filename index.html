@@ -35,7 +35,7 @@
           <form action="#" class="calc__form calc__form--bill">
             <div class="calc__form-texts">
               <label for="bill" class="calc__heading">Bill</label>
-              <p class="calc__error-text"></p>
+              <p class="calc__error-text js-error-text"></p>
             </div>
 
             <input
@@ -51,29 +51,19 @@
           <div class="calc__tips">
             <p class="calc__heading">Select Tip %</p>
             <ul class="calc__list">
-              <li class="calc__item">
-                <a href="#" class="calc__tip js-percentage">5%</a>
-              </li>
-              <li class="calc__item">
-                <a href="#" class="calc__tip js-percentage">10%</a>
-              </li>
-              <li class="calc__item">
-                <a href="#" class="calc__tip js-percentage">15%</a>
-              </li>
-              <li class="calc__item">
-                <a href="#" class="calc__tip js-percentage">25%</a>
-              </li>
-              <li class="calc__item">
-                <a href="#" class="calc__tip js-percentage">50%</a>
-              </li>
-              <li class="calc__item">
+              <li class="calc__item js-item">5%</li>
+              <li class="calc__item js-item">10%</li>
+              <li class="calc__item js-item">15%</li>
+              <li class="calc__item js-item">25%</li>
+              <li class="calc__item js-item">50%</li>
+              <li>
                 <form action="#" class="calc__form calc__form--custom">
                   <input
                     type="text"
                     name="custom"
                     placeholder="Custom"
                     id="custom"
-                    class="calc__input js-input"
+                    class="calc__input js-input--custom"
                     required
                   />
                 </form>
@@ -86,7 +76,7 @@
               <label for="number of people" class="calc__heading">
                 Number of People
               </label>
-              <p class="calc__error-text"></p>
+              <p class="calc__error-text js-error-text"></p>
             </div>
             <input
               type="text"

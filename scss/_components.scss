@@ -77,7 +77,11 @@
 
       & input {
         color: $color-primary;
-        padding-block: 0.8rem;
+        padding-block: 1rem;
+
+        @media (min-width: 1140px) {
+          font-size: 2rem;
+        }
       }
     }
   }
@@ -141,37 +145,26 @@
   }
 
   &__item {
+    color: $color-secondary;
     background-color: $color-primary;
     border-radius: 0.5rem;
+    font-size: 2.5rem;
     padding-block: 0.1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.4s;
+    transition: all 0.4s;
 
     &:hover {
       cursor: pointer;
+      color: $color-primary;
       background-color: $color-hover;
-
-      .calc__tip {
-        color: $color-primary;
-      }
     }
 
     &--active {
+      color: $color-primary;
       background-color: $color-success;
-
-      .calc__tip {
-        color: $color-primary;
-      }
     }
-  }
-
-  &__tip {
-    color: $color-secondary;
-    font-size: 2.5rem;
-    text-decoration: none;
-    transition: color 0.4s;
   }
 
   &__output-container {
