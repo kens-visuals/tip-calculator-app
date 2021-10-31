@@ -87,7 +87,7 @@
   }
 
   &__heading {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 
     &--tip {
       color: $color-secondary;
@@ -132,6 +132,7 @@
 
   &__list {
     list-style: none;
+    margin-top: 1.5rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 5rem);

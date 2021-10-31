@@ -114,7 +114,7 @@ body {
           .calc__form--custom input {
             font-size: 2rem; } }
   .calc__heading {
-    margin-bottom: 1rem; }
+    margin-bottom: 0.5rem; }
     .calc__heading--tip {
       color: #c5e4e7;
       margin-bottom: 0;
@@ -144,6 +144,7 @@ body {
       outline: 0.2rem solid #26c0ab; }
   .calc__list {
     list-style: none;
+    margin-top: 1.5rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 5rem);
