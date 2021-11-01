@@ -1,8 +1,8 @@
+const ZERO_REGEX = /0\d+/g;
 const NUM_REGEX = /[^0-9\.]+/g;
 const PEOPLE_REGEX = /[^0-9]+/g;
-const LETTER_REGEX = /[a-zA-Z,/<>\?;':""[\]\\{}\|`~!@#\$%\^&\*()_=\+]+/g;
 const NEGATIVE_REGEX = /[\-]+/g;
-const ZERO_REGEX = /0\d+/g;
+const LETTER_REGEX = /[a-zA-Z,/<>\?;':""[\]\\{}\|`~!@#\$%\^&\*()_=\+]+/g;
 
 const resetBtn = document.querySelector('.js-reset');
 const customInput = document.querySelector('.js-input--custom');
@@ -15,6 +15,8 @@ const percentageBtns = document.querySelectorAll('.js-percentage');
 const [billInput, custom, peopleInput] = inputs;
 const [tipAmount, totalAmount] = numbers;
 const [billErrorText, percentageErrorText, peopleErrorText] = errorTexts;
+
+const testRegexp = (regex, val) => new RegExp(regex).test(val);
 
 const setActiveState = function () {
   items.forEach((item) => {
@@ -38,21 +40,34 @@ const setSuccessState = function (e) {
   e.target.style.outline = '0.2rem solid hsl(172, 67%, 45%)';
 };
 
-const validateBillInput = function (e) {
+const validateInput = function (e, ...regex) {
   let value = e.target.value;
 
   resetBtn.removeAttribute('disabled');
-  // e.target.value = e.target.value.replace(/[a-zA-Z\\\_]*/g, '');
 
-  if (!value || value === '0') {
-    setErrorState(e, "Can't be zero");
-  } else if (NUM_REGEX.test(value) || LETTER_REGEX.test(value))
-    setErrorState(e, "Can't be special character");
-  else if (value < 0 || NEGATIVE_REGEX.test(value))
-    setErrorState(e, "Can't be negative");
-  else if (ZERO_REGEX.test(value)) setErrorState(e, "Can't start with zero");
+  if (!value || value === '0') setErrorState(e, "Can't be zero");
+  else if (testRegexp(regex[0], value) || testRegexp(regex[1], value))
+    setErrorState(e, 'Positive numbers only');
+  else if (testRegexp(regex[2], value))
+    setErrorState(e, "Can't start with zero");
   else setSuccessState(e);
 };
+
+// const validateBillInput = function (e) {
+//   let value = e.target.value;
+
+//   resetBtn.removeAttribute('disabled');
+//   // e.target.value = e.target.value.replace(/[a-zA-Z\\\_]*/g, '');
+
+//   if (!value || value === '0') {
+//     setErrorState(e, "Can't be zero");
+//   } else if (NUM_REGEX.test(value) || LETTER_REGEX.test(value))
+//     setErrorState(e, "Can't be special character");
+//   else if (value < 0 || NEGATIVE_REGEX.test(value))
+//     setErrorState(e, "Can't be negative");
+//   else if (ZERO_REGEX.test(value)) setErrorState(e, "Can't start with zero");
+//   else setSuccessState(e);
+// };
 
 const validateCustomInput = function (e) {
   const value = e.target.value;
@@ -68,19 +83,19 @@ const validateCustomInput = function (e) {
   if (value === '') customInput.style.outline = 0;
 };
 
-const validatePeopleInput = function (e) {
-  const value = e.target.value;
+// const validatePeopleInput = function (e) {
+//   const value = e.target.value;
 
-  resetBtn.removeAttribute('disabled');
+//   resetBtn.removeAttribute('disabled');
 
-  if (!value || value === '0') setErrorState(e, "Can't be zero");
-  else if (PEOPLE_REGEX.test(value) || LETTER_REGEX.test(value))
-    setErrorState(e, 'Only numbers allowed');
-  else if (value < 0 || NEGATIVE_REGEX.test(value))
-    setErrorState(e, "Can't be negative");
-  else if (ZERO_REGEX.test(value)) setErrorState(e, "Can't start with zero");
-  else setSuccessState(e);
-};
+//   if (!value || value === '0') setErrorState(e, "Can't be zero");
+//   else if (PEOPLE_REGEX.test(value) || LETTER_REGEX.test(value))
+//     setErrorState(e, 'Only numbers allowed');
+//   else if (value < 0 || NEGATIVE_REGEX.test(value))
+//     setErrorState(e, "Can't be negative");
+//   else if (ZERO_REGEX.test(value)) setErrorState(e, "Can't start with zero");
+//   else setSuccessState(e);
+// };
 
 const resetAll = function () {
   customInput.value = '';
@@ -97,9 +112,13 @@ const resetAll = function () {
 };
 
 resetBtn.addEventListener('click', resetAll);
-billInput.addEventListener('keyup', validateBillInput);
 customInput.addEventListener('keyup', validateCustomInput);
-peopleInput.addEventListener('keyup', validatePeopleInput);
+billInput.addEventListener('keyup', (e) =>
+  validateInput(e, NUM_REGEX, LETTER_REGEX, ZERO_REGEX)
+);
+peopleInput.addEventListener('keyup', (e) =>
+  validateInput(e, PEOPLE_REGEX, LETTER_REGEX, ZERO_REGEX)
+);
 
 window.onload = () =>
   [...inputs].map((el) => {
