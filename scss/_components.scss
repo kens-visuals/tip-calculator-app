@@ -124,10 +124,10 @@
     border-radius: 0.2rem;
     border: 0;
     padding: 0.5rem 2rem;
+    cursor: pointer;
 
     &:focus-visible {
-      cursor: pointer;
-      outline: 0.2rem solid $color-success;
+      outline: 0.2rem solid transparent;
     }
   }
 

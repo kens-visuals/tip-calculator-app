@@ -139,10 +139,10 @@ body {
     text-align: right;
     border-radius: 0.2rem;
     border: 0;
-    padding: 0.5rem 2rem; }
+    padding: 0.5rem 2rem;
+    cursor: pointer; }
     .calc__input:focus-visible {
-      cursor: pointer;
-      outline: 0.2rem solid #26c0ab; }
+      outline: 0.2rem solid transparent; }
   .calc__list {
     list-style: none;
     margin-top: 1.5rem;
