@@ -133,6 +133,7 @@ body {
   .calc__input {
     width: 100%;
     color: #00494d;
+    caret-color: #26c0ab;
     background-color: #f4fafa;
     font-size: 2.3rem;
     text-align: right;
