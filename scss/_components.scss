@@ -194,6 +194,10 @@
     }
   }
 
+  &__amount-headings {
+    flex-shrink: 0;
+  }
+
   &__number {
     color: $color-success;
     font-size: 3rem;

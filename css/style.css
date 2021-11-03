@@ -191,6 +191,8 @@ body {
     @media (min-width: 1140px) {
       .calc__wrapper {
         margin-bottom: 3rem; } }
+  .calc__amount-headings {
+    flex-shrink: 0; }
   .calc__number {
     color: #26c0ab;
     font-size: 3rem; }

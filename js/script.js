@@ -5,7 +5,6 @@ const amountNumbers = document.querySelectorAll('.js-number');
 const errorTexts = document.querySelectorAll('.js-error-text');
 const percentageBtns = document.querySelectorAll('.js-percentage');
 
-let tip = 0;
 const [tipAmount, totalAmount] = amountNumbers;
 const [billInput, customInput, peopleInput] = inputs;
 
@@ -27,26 +26,57 @@ const testRegExp = (regex, val) => new RegExp(regex).test(val);
 const removeBtnActiveClass = () =>
   listItems.forEach((item) => item.classList.remove('calc__item--active'));
 
-const errorStyle = (input) => {
-  input.style.color = `${colors.error}`;
-  input.style.caretColor = `${colors.error}`;
-  input.style.outline = `0.2rem solid ${colors.error}`;
+const setStateStyle = (input, ...colors) => {
+  const [color, caretColor, outlineColor] = colors;
+
+  input.style.color = `${color}`;
+  input.style.caretColor = `${caretColor}`;
+  input.style.outline = `0.2rem solid ${outlineColor}`;
 };
 
-const succesStyle = (input) => {
-  input.style.color = `${colors.primary}`;
-  input.style.caretColor = `${colors.success}`;
-  input.style.outline = `0.2rem solid ${colors.success}`;
-};
-
-const setErrorState = function (e, msg) {
-  errorStyle(e.target);
+const setErrorState = function (e, msg = '') {
+  setStateStyle(e.target, colors.error, colors.error, colors.error);
   e.target.previousElementSibling.lastElementChild.textContent = msg;
 };
 
 const setSuccessState = function (e) {
-  succesStyle(e.target);
+  setStateStyle(e.target, colors.primary, colors.success, colors.success);
   e.target.previousElementSibling.lastElementChild.textContent = '';
+};
+
+const setInputOutline = function (e) {
+  inputs.forEach((input) => {
+    resetBtn.removeAttribute('disabled');
+    input.style.outline = `0.2rem solid transparent`;
+    e.target.style.outline = `0.2rem solid ${colors.success}`;
+  });
+};
+
+const setPercentageBtnsState = function (e) {
+  listItems.forEach(() => {
+    removeBtnActiveClass();
+    customInput.value = '';
+    customInput.style.outline = '0';
+    customInput.style.color = `${colors.primary}`;
+    resetBtn.removeAttribute('disabled');
+    e.target.classList.add('calc__item--active');
+    calcTotalAmount(e.target.dataset.percentage);
+  });
+};
+
+const resetAll = function () {
+  removeBtnActiveClass();
+
+  inputs.forEach((el) => {
+    el.value = '';
+    el.style.outline = 0;
+    el.style.color = `${colors.primary}`;
+    el.style.caretColor = `${colors.success}`;
+  });
+  errorTexts.forEach((el) => (el.textContent = ''));
+  amountNumbers.forEach((el) => (el.textContent = '$0.00'));
+
+  resetBtn.setAttribute('disabled', true);
 };
 
 const calcTotalAmount = (tipPercentage) => {
@@ -59,25 +89,18 @@ const calcTotalAmount = (tipPercentage) => {
 
     tipAmount.textContent = `$${calcTipPerPerson.toFixed(2)}`;
     totalAmount.textContent = `$${calcTotalPerPerson.toFixed(2)}`;
+  } else if (bill > 0) {
+    totalAmount.textContent = `$${(bill / 1).toFixed(2)}`;
   }
 };
 
-const selectTip = function () {
-  listItems.forEach((item) =>
-    item.addEventListener('click', (e) => {
-      tip = e.target.dataset.percentage;
-
-      calcTotalAmount(tip);
-    })
-  );
-};
-
 const validateInput = function (e, ...regex) {
-  let value = e.target.value;
+  const value = e.target.value;
 
   resetBtn.removeAttribute('disabled');
 
-  if (!value || value === '0') setErrorState(e, "Can't be zero");
+  if (value === '0') setErrorState(e, "Can't be zero");
+  else if (value > 999999) setErrorState(e, 'WTF!!! WHO ARE YOU???');
   else if (testRegExp(regex[0], value) || testRegExp(regex[1], value))
     setErrorState(e, 'Positive numbers only');
   else if (testRegExp(regex[2], value))
@@ -86,7 +109,7 @@ const validateInput = function (e, ...regex) {
     setErrorState(e, "Can't have two dots");
   else {
     setSuccessState(e);
-    calcTotalAmount(tip);
+    calcTotalAmount(value);
   }
 };
 
@@ -95,19 +118,17 @@ const validateCustomInput = function (e) {
 
   if (
     value < 0 ||
+    value > 100 ||
     value === '0' ||
     value.split(/[\.]/).length > 2 ||
     testRegExp(regExes.num, value) ||
     testRegExp(regExes.zero, value) ||
     testRegExp(regExes.letter, value)
   )
-    errorStyle(e.target);
+    setStateStyle(e.target, colors.error, colors.error, colors.error);
   else {
-    succesStyle(e.target);
-
-    tip = customInput.value;
-
-    calcTotalAmount(tip);
+    setStateStyle(e.target, colors.primary, colors.success, colors.success);
+    calcTotalAmount(value);
   }
 
   value === '' && (e.target.style.outline = '0');
@@ -117,24 +138,12 @@ const validateCustomInput = function (e) {
   removeBtnActiveClass();
 };
 
-const resetAll = function () {
-  removeBtnActiveClass();
-
-  inputs.forEach((el) => {
-    el.value = '';
-    el.style.outline = 0;
-    el.style.color = `${colors.primary}`;
-    el.style.caretColor = `${colors.success}`;
-  });
-
-  errorTexts.forEach((el) => (el.textContent = ''));
-
-  amountNumbers.forEach((el) => (el.textContent = '$0.00'));
-
-  resetBtn.setAttribute('disabled', true);
-};
-
 resetBtn.addEventListener('click', resetAll);
+inputs.forEach((input) => input.addEventListener('click', setInputOutline));
+listItems.forEach((item) =>
+  item.addEventListener('click', setPercentageBtnsState)
+);
+
 customInput.addEventListener('input', validateCustomInput);
 billInput.addEventListener('input', (e) =>
   validateInput(e, regExes.num, regExes.letter, regExes.zero)
@@ -143,40 +152,7 @@ peopleInput.addEventListener('input', (e) =>
   validateInput(e, regExes.people, regExes.letter, regExes.zero)
 );
 
-const setActiveState = function () {
-  listItems.forEach((item) =>
-    item.addEventListener('click', (e) => {
-      listItems.forEach(() => {
-        removeBtnActiveClass();
-        customInput.value = '';
-        customInput.style.outline = '0';
-        customInput.style.color = `${colors.primary}`;
-        resetBtn.removeAttribute('disabled');
-        e.target.classList.add('calc__item--active');
-      });
-    })
-  );
-};
-
-const setInputOutline = function () {
-  inputs.forEach((input) =>
-    input.addEventListener('click', (e) => {
-      inputs.forEach((input) => {
-        resetBtn.removeAttribute('disabled');
-        input.style.outline = `0.2rem solid transparent`;
-        e.target.style.outline = `0.2rem solid ${colors.success}`;
-      });
-    })
-  );
-};
-
 window.onload = () => {
   inputs.forEach((input) => (input.value = ''));
   resetBtn.setAttribute('disabled', true);
 };
-
-(() => {
-  selectTip();
-  setActiveState();
-  setInputOutline();
-})();
