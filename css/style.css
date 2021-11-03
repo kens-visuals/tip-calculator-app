@@ -222,12 +222,13 @@ body {
   width: 100%;
   max-width: 90rem;
   background-color: white;
-  font-size: 1rem;
+  font-size: 0.5rem;
   text-align: center;
   padding-bottom: 1rem; }
   @media (min-width: 810px) {
     .attribution {
       background-color: unset;
+      font-size: 1rem;
       margin-block: 1rem;
       padding-bottom: 0; } }
   .attribution__link:link, .attribution__link:visited {
