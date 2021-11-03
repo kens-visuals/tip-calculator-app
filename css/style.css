@@ -195,8 +195,11 @@ body {
   .calc__amount-headings {
     flex-shrink: 0; }
   .calc__number {
+    width: 28rem;
     color: #26c0ab;
-    font-size: 3rem; }
+    font-size: 3rem;
+    text-align: right;
+    overflow: auto; }
     @media (min-width: 1140px) {
       .calc__number {
         font-size: 4.5rem; } }

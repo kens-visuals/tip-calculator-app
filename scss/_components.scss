@@ -200,8 +200,11 @@
   }
 
   &__number {
+    width: 28rem;
     color: $color-success;
     font-size: 3rem;
+    text-align: right;
+    overflow: auto;
 
     @media (min-width: 1140px) {
       font-size: 4.5rem;
