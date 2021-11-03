@@ -5,6 +5,7 @@ const amountNumbers = document.querySelectorAll('.js-number');
 const errorTexts = document.querySelectorAll('.js-error-text');
 const percentageBtns = document.querySelectorAll('.js-percentage');
 
+let tip = 0;
 const [tipAmount, totalAmount] = amountNumbers;
 const [billInput, customInput, peopleInput] = inputs;
 
@@ -40,13 +41,35 @@ const succesStyle = (input) => {
 
 const setErrorState = function (e, msg) {
   errorStyle(e.target);
-  removeBtnActiveClass();
   e.target.previousElementSibling.lastElementChild.textContent = msg;
 };
 
 const setSuccessState = function (e) {
   succesStyle(e.target);
   e.target.previousElementSibling.lastElementChild.textContent = '';
+};
+
+const calcTotalAmount = (tipPercentage) => {
+  const bill = billInput.value;
+  const people = peopleInput.value;
+
+  if (bill > 0 && people > 0) {
+    const calcTipPerPerson = ((bill / 100) * tipPercentage) / people;
+    const calcTotalPerPerson = bill / people + calcTipPerPerson;
+
+    tipAmount.textContent = `$${calcTipPerPerson.toFixed(2)}`;
+    totalAmount.textContent = `$${calcTotalPerPerson.toFixed(2)}`;
+  }
+};
+
+const selectTip = function () {
+  listItems.forEach((item) =>
+    item.addEventListener('click', (e) => {
+      tip = e.target.dataset.percentage;
+
+      calcTotalAmount(tip);
+    })
+  );
 };
 
 const validateInput = function (e, ...regex) {
@@ -61,7 +84,10 @@ const validateInput = function (e, ...regex) {
     setErrorState(e, "Can't start with zero");
   else if (value.split(/[\.]/).length > 2)
     setErrorState(e, "Can't have two dots");
-  else setSuccessState(e);
+  else {
+    setSuccessState(e);
+    calcTotalAmount(tip);
+  }
 };
 
 const validateCustomInput = function (e) {
@@ -76,7 +102,13 @@ const validateCustomInput = function (e) {
     testRegExp(regExes.letter, value)
   )
     errorStyle(e.target);
-  else succesStyle(e.target);
+  else {
+    succesStyle(e.target);
+
+    tip = customInput.value;
+
+    calcTotalAmount(tip);
+  }
 
   value === '' && (e.target.style.outline = '0');
 
@@ -97,15 +129,17 @@ const resetAll = function () {
 
   errorTexts.forEach((el) => (el.textContent = ''));
 
+  amountNumbers.forEach((el) => (el.textContent = '$0.00'));
+
   resetBtn.setAttribute('disabled', true);
 };
 
 resetBtn.addEventListener('click', resetAll);
-customInput.addEventListener('keyup', validateCustomInput);
-billInput.addEventListener('keyup', (e) =>
+customInput.addEventListener('input', validateCustomInput);
+billInput.addEventListener('input', (e) =>
   validateInput(e, regExes.num, regExes.letter, regExes.zero)
 );
-peopleInput.addEventListener('keyup', (e) =>
+peopleInput.addEventListener('input', (e) =>
   validateInput(e, regExes.people, regExes.letter, regExes.zero)
 );
 
@@ -119,7 +153,6 @@ const setActiveState = function () {
         customInput.style.color = `${colors.primary}`;
         resetBtn.removeAttribute('disabled');
         e.target.classList.add('calc__item--active');
-        // e.target.classList.toggle('calc__item--active');
       });
     })
   );
@@ -143,6 +176,7 @@ window.onload = () => {
 };
 
 (() => {
+  selectTip();
   setActiveState();
   setInputOutline();
 })();
