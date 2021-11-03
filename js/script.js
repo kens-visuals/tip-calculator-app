@@ -75,6 +75,7 @@ const setPercentageBtnsState = function (e) {
 };
 
 const resetAll = function () {
+  TIP = 0;
   removeBtnActiveClass();
 
   inputs.forEach((el) => {
@@ -138,7 +139,9 @@ const validateCustomInput = function (e) {
     setStateStyle(e.target, colors.error, colors.error, colors.error);
   else {
     setStateStyle(e.target, colors.primary, colors.success, colors.success);
-    calcTotalAmount(value);
+
+    TIP = value;
+    calcTotalAmount(TIP);
   }
 
   value === '' && (e.target.style.outline = '0');
