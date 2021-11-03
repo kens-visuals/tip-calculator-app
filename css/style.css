@@ -224,7 +224,7 @@ body {
   background-color: white;
   font-size: 0.8rem;
   text-align: center;
-  padding-bottom: 2rem; }
+  padding-bottom: 4rem; }
   @media (min-width: 810px) {
     .attribution {
       background-color: unset;
