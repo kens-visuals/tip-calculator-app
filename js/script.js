@@ -1,4 +1,4 @@
-let TIP = 0;
+let currentTip = 0;
 
 const resetBtn = document.querySelector('.js-reset');
 const inputs = document.querySelectorAll('.js-input');
@@ -69,13 +69,13 @@ const setPercentageBtnsState = function (e) {
     resetBtn.removeAttribute('disabled');
     e.target.classList.add('calc__item--active');
 
-    TIP = e.target.dataset.percentage;
-    calcTotalAmount(TIP);
+    currentTip = e.target.dataset.percentage;
+    calcTotalAmount(currentTip);
   });
 };
 
 const resetAll = function () {
-  TIP = 0;
+  currentTip = 0;
   removeBtnActiveClass();
 
   inputs.forEach((el) => {
@@ -119,7 +119,7 @@ const validateInput = function (e, ...regex) {
     setErrorState(e, "Can't have two dots");
   else {
     setSuccessState(e);
-    calcTotalAmount(TIP);
+    calcTotalAmount(currentTip);
   }
 };
 
@@ -140,8 +140,8 @@ const validateCustomInput = function (e) {
   else {
     setStateStyle(e.target, colors.primary, colors.success, colors.success);
 
-    TIP = value;
-    calcTotalAmount(TIP);
+    currentTip = value;
+    calcTotalAmount(currentTip);
   }
 
   value === '' && (e.target.style.outline = '0');

@@ -30,7 +30,7 @@
     padding-inline: 1rem;
 
     & > * {
-      margin-bottom: 4rem;
+      margin-bottom: 3.7rem;
     }
 
     @media (min-width: 1140px) {
@@ -134,7 +134,7 @@
 
   &__list {
     list-style: none;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 5rem);
