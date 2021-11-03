@@ -128,7 +128,7 @@
     cursor: pointer;
 
     &:focus-visible {
-      outline: 0.2rem solid transparent;
+      outline: 0.2rem solid $color-success;
     }
   }
 
@@ -218,6 +218,10 @@
     text-transform: uppercase;
     padding-block: 1rem;
     transition: background-color 0.2s ease-out;
+
+    &:focus-visible {
+      outline: 0.3rem solid $color-hover;
+    }
 
     &:hover:enabled {
       cursor: pointer;

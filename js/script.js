@@ -77,6 +77,7 @@ const setPercentageBtnsState = function (e) {
 const resetAll = function () {
   currentTip = 0;
   removeBtnActiveClass();
+  resetBtn.setAttribute('disabled', true);
 
   inputs.forEach((el) => {
     el.value = '';
@@ -86,8 +87,6 @@ const resetAll = function () {
   });
   errorTexts.forEach((el) => (el.textContent = ''));
   amountNumbers.forEach((el) => (el.textContent = '$0.00'));
-
-  resetBtn.setAttribute('disabled', true);
 };
 
 const calcTotalAmount = (tipPercentage) => {
@@ -135,13 +134,12 @@ const validateCustomInput = function (e) {
     testRegExp(regExes.num, value) ||
     testRegExp(regExes.zero, value) ||
     testRegExp(regExes.letter, value)
-  )
+  ) {
     setStateStyle(e.target, colors.error, colors.error, colors.error);
-  else {
-    setStateStyle(e.target, colors.primary, colors.success, colors.success);
-
+  } else {
     currentTip = value;
     calcTotalAmount(currentTip);
+    setStateStyle(e.target, colors.primary, colors.success, colors.success);
   }
 
   value === '' && (e.target.style.outline = '0');

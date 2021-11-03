@@ -143,7 +143,7 @@ body {
     padding: 0.5rem 2rem;
     cursor: pointer; }
     .calc__input:focus-visible {
-      outline: 0.2rem solid transparent; }
+      outline: 0.2rem solid #26c0ab; }
   .calc__list {
     list-style: none;
     margin-top: 1rem;
@@ -210,6 +210,8 @@ body {
     text-transform: uppercase;
     padding-block: 1rem;
     transition: background-color 0.2s ease-out; }
+    .calc__reset:focus-visible {
+      outline: 0.3rem solid #a1e8e0; }
     .calc__reset:hover:enabled {
       cursor: pointer;
       background-color: #a1e8e0; }
