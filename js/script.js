@@ -55,7 +55,6 @@ const setInputOutline = function (e) {
       e.target.style.outline = `0.2rem solid ${colors.success}`;
     } else {
       input.style.outline = `0.2rem solid transparent`;
-      e.target.style.outline = `0.2rem solid transparent`;
     }
   });
 };
