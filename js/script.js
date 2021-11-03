@@ -95,7 +95,7 @@ const calcTotalAmount = (tipPercentage) => {
   const calcTipPerPerson = ((bill / 100) * tipPercentage) / people;
   const calcTotalPerPerson = bill / people + calcTipPerPerson;
 
-  if (bill > 0 && people > 0) {
+  if (bill > 0 && bill < 999999 && people > 0 && people < 999) {
     tipAmount.textContent = `$${calcTipPerPerson.toFixed(2)}`;
     totalAmount.textContent = `$${calcTotalPerPerson.toFixed(2)}`;
   } else if (bill > 0) {

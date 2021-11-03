@@ -126,6 +126,8 @@
     border: 0;
     padding: 0.5rem 2rem;
     cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
 
     &:focus-visible {
       outline: 0.2rem solid $color-success;
