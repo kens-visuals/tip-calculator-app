@@ -77,9 +77,10 @@
 
       & input {
         color: $color-primary;
-        padding-block: 1rem;
+        padding-block: 0.8rem;
 
         @media (min-width: 1140px) {
+          padding-block: 1rem;
           font-size: 2rem;
         }
       }

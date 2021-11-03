@@ -1,3 +1,5 @@
+let TIP = 0;
+
 const resetBtn = document.querySelector('.js-reset');
 const inputs = document.querySelectorAll('.js-input');
 const listItems = document.querySelectorAll('.js-item');
@@ -9,6 +11,7 @@ const [tipAmount, totalAmount] = amountNumbers;
 const [billInput, customInput, peopleInput] = inputs;
 
 const regExes = {
+  dot: /^\.$/g,
   zero: /^0\d+/g,
   num: /[^0-9\.]+/g,
   people: /[^0-9]+/g,
@@ -34,7 +37,7 @@ const setStateStyle = (input, ...colors) => {
   input.style.outline = `0.2rem solid ${outlineColor}`;
 };
 
-const setErrorState = function (e, msg = '') {
+const setErrorState = function (e, msg) {
   setStateStyle(e.target, colors.error, colors.error, colors.error);
   e.target.previousElementSibling.lastElementChild.textContent = msg;
 };
@@ -46,9 +49,14 @@ const setSuccessState = function (e) {
 
 const setInputOutline = function (e) {
   inputs.forEach((input) => {
-    resetBtn.removeAttribute('disabled');
-    input.style.outline = `0.2rem solid transparent`;
-    e.target.style.outline = `0.2rem solid ${colors.success}`;
+    if (e.target.closest('.js-input')) {
+      resetBtn.removeAttribute('disabled');
+      input.style.outline = `0.2rem solid transparent`;
+      e.target.style.outline = `0.2rem solid ${colors.success}`;
+    } else {
+      input.style.outline = `0.2rem solid transparent`;
+      e.target.style.outline = `0.2rem solid transparent`;
+    }
   });
 };
 
@@ -60,7 +68,9 @@ const setPercentageBtnsState = function (e) {
     customInput.style.color = `${colors.primary}`;
     resetBtn.removeAttribute('disabled');
     e.target.classList.add('calc__item--active');
-    calcTotalAmount(e.target.dataset.percentage);
+
+    TIP = e.target.dataset.percentage;
+    calcTotalAmount(TIP);
   });
 };
 
@@ -82,11 +92,10 @@ const resetAll = function () {
 const calcTotalAmount = (tipPercentage) => {
   const bill = billInput.value;
   const people = peopleInput.value;
+  const calcTipPerPerson = ((bill / 100) * tipPercentage) / people;
+  const calcTotalPerPerson = bill / people + calcTipPerPerson;
 
   if (bill > 0 && people > 0) {
-    const calcTipPerPerson = ((bill / 100) * tipPercentage) / people;
-    const calcTotalPerPerson = bill / people + calcTipPerPerson;
-
     tipAmount.textContent = `$${calcTipPerPerson.toFixed(2)}`;
     totalAmount.textContent = `$${calcTotalPerPerson.toFixed(2)}`;
   } else if (bill > 0) {
@@ -109,7 +118,7 @@ const validateInput = function (e, ...regex) {
     setErrorState(e, "Can't have two dots");
   else {
     setSuccessState(e);
-    calcTotalAmount(value);
+    calcTotalAmount(TIP);
   }
 };
 
@@ -121,6 +130,7 @@ const validateCustomInput = function (e) {
     value > 100 ||
     value === '0' ||
     value.split(/[\.]/).length > 2 ||
+    testRegExp(regExes.dot, value) ||
     testRegExp(regExes.num, value) ||
     testRegExp(regExes.zero, value) ||
     testRegExp(regExes.letter, value)
@@ -139,7 +149,7 @@ const validateCustomInput = function (e) {
 };
 
 resetBtn.addEventListener('click', resetAll);
-inputs.forEach((input) => input.addEventListener('click', setInputOutline));
+document.addEventListener('click', setInputOutline);
 listItems.forEach((item) =>
   item.addEventListener('click', setPercentageBtnsState)
 );
@@ -152,7 +162,7 @@ peopleInput.addEventListener('input', (e) =>
   validateInput(e, regExes.people, regExes.letter, regExes.zero)
 );
 
-window.onload = () => {
+window.addEventListener('load', () => {
   inputs.forEach((input) => (input.value = ''));
   resetBtn.setAttribute('disabled', true);
-};
+});

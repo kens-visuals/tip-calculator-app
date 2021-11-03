@@ -109,9 +109,10 @@ body {
       width: 100%; }
       .calc__form--custom input {
         color: #00494d;
-        padding-block: 1rem; }
+        padding-block: 0.8rem; }
         @media (min-width: 1140px) {
           .calc__form--custom input {
+            padding-block: 1rem;
             font-size: 2rem; } }
   .calc__heading {
     margin-bottom: 0.5rem; }
