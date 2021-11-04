@@ -25,10 +25,14 @@ const removeBtnActiveClass = () =>
 
 const setErrorState = function (e, msg) {
   e.target.classList.add('calc__input--error');
+  e.target.setAttribute('aria-invalid', 'true');
+  e.target.setAttribute('aria-describedBy', msg);
   e.target.previousElementSibling.lastElementChild.textContent = msg;
 };
 
 const setSuccessState = function (e) {
+  e.target.removeAttribute('aria-invalid');
+  e.target.removeAttribute('aria-describedBy');
   e.target.classList.remove('calc__input--error');
   e.target.previousElementSibling.lastElementChild.textContent = '';
 };
@@ -102,6 +106,9 @@ const validateInput = function (e, ...regex) {
 const validateCustomInput = function (e) {
   const value = e.target.value;
 
+  removeBtnActiveClass();
+  resetBtn.removeAttribute('disabled');
+
   if (
     value < 0 ||
     value > 100 ||
@@ -120,10 +127,6 @@ const validateCustomInput = function (e) {
   }
 
   value === '' && e.target.classList.remove('calc__input--error');
-
-  resetBtn.removeAttribute('disabled');
-
-  removeBtnActiveClass();
 };
 
 resetBtn.addEventListener('click', resetAll);
@@ -140,6 +143,6 @@ peopleInput.addEventListener('input', (e) =>
 );
 
 window.addEventListener('load', () => {
-  inputs.forEach((input) => (input.value = ''));
   resetBtn.setAttribute('disabled', true);
+  inputs.forEach((input) => (input.value = ''));
 });
