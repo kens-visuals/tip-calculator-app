@@ -130,6 +130,15 @@
     &:focus-visible {
       outline: 0.2rem solid $color-success;
     }
+
+    &--error {
+      color: $color-error;
+      caret-color: $color-error;
+
+      &:focus-visible {
+        outline: 0.2rem solid $color-error;
+      }
+    }
   }
 
   &__list {

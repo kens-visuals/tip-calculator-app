@@ -29,42 +29,45 @@ const testRegExp = (regex, val) => new RegExp(regex).test(val);
 const removeBtnActiveClass = () =>
   listItems.forEach((item) => item.classList.remove('calc__item--active'));
 
-const setStateStyle = (input, ...colors) => {
-  const [color, caretColor, outlineColor] = colors;
+// const setStateStyle = (input, ...colors) => {
+//   const [color, caretColor, outlineColor] = colors;
 
-  input.style.color = `${color}`;
-  input.style.caretColor = `${caretColor}`;
-  input.style.outline = `0.2rem solid ${outlineColor}`;
-};
+//   input.style.color = `${color}`;
+//   input.style.caretColor = `${caretColor}`;
+//   input.style.outline = `0.2rem solid ${outlineColor}`;
+// };
 
 const setErrorState = function (e, msg) {
-  setStateStyle(e.target, colors.error, colors.error, colors.error);
+  // setStateStyle(e.target, colors.error, colors.error, colors.error);
+  e.target.classList.add('calc__input--error');
   e.target.previousElementSibling.lastElementChild.textContent = msg;
 };
 
 const setSuccessState = function (e) {
-  setStateStyle(e.target, colors.primary, colors.success, colors.success);
+  // setStateStyle(e.target, colors.primary, colors.success, colors.success);
+  e.target.classList.remove('calc__input--error');
   e.target.previousElementSibling.lastElementChild.textContent = '';
 };
 
-const setInputOutline = function (e) {
-  inputs.forEach((input) => {
-    if (e.target.closest('.js-input')) {
-      resetBtn.removeAttribute('disabled');
-      input.style.outline = `0.2rem solid transparent`;
-      e.target.style.outline = `0.2rem solid ${colors.success}`;
-    } else {
-      input.style.outline = `0.2rem solid transparent`;
-    }
-  });
-};
+// const setInputOutline = function (e) {
+//   inputs.forEach((input) => {
+//     if (e.target.closest('.js-input')) {
+//       resetBtn.removeAttribute('disabled');
+//       input.style.outline = `0.2rem solid transparent`;
+//       e.target.style.outline = `0.2rem solid ${colors.success}`;
+//     } else {
+//       input.style.outline = `0.2rem solid transparent`;
+//     }
+//   });
+// };
 
 const setPercentageBtnsState = function (e) {
   listItems.forEach(() => {
     removeBtnActiveClass();
     customInput.value = '';
-    customInput.style.outline = '0';
-    customInput.style.color = `${colors.primary}`;
+    customInput.classList.remove('calc__input--error');
+    // customInput.style.outline = '0';
+    // customInput.style.color = `${colors.primary}`;
     resetBtn.removeAttribute('disabled');
     e.target.classList.add('calc__item--active');
 
@@ -80,9 +83,10 @@ const resetAll = function () {
 
   inputs.forEach((el) => {
     el.value = '';
-    el.style.outline = 0;
-    el.style.color = `${colors.primary}`;
-    el.style.caretColor = `${colors.success}`;
+    el.classList.remove('calc__input--error');
+    // el.style.outline = 0;
+    // el.style.color = `${colors.primary}`;
+    // el.style.caretColor = `${colors.success}`;
   });
   errorTexts.forEach((el) => (el.textContent = ''));
   amountNumbers.forEach((el) => (el.textContent = '$0.00'));
@@ -94,7 +98,7 @@ const calcTotalAmount = (tipPercentage) => {
   const calcTipPerPerson = ((bill / 100) * tipPercentage) / people;
   const calcTotalPerPerson = bill / people + calcTipPerPerson;
 
-  if (bill > 0 && bill < 999999 && people > 0 && people < 999) {
+  if (bill > 0 && bill < 999999 && people > 0 && people < 99) {
     tipAmount.textContent = `$${calcTipPerPerson.toFixed(2)}`;
     totalAmount.textContent = `$${calcTotalPerPerson.toFixed(2)}`;
   } else if (bill > 0) {
@@ -108,7 +112,11 @@ const validateInput = function (e, ...regex) {
   resetBtn.removeAttribute('disabled');
 
   if (value === '0') setErrorState(e, "Can't be zero");
-  else if (value > 999999) setErrorState(e, 'WTF!!! WHO ARE YOU???');
+  else if (
+    (value > 999999 && e.target.name === 'bill') ||
+    (value > 99 && e.target.name === 'number of people')
+  )
+    setErrorState(e, 'WTF!!! WHO ARE YOU???');
   else if (testRegExp(regex[0], value) || testRegExp(regex[1], value))
     setErrorState(e, 'Positive numbers only');
   else if (testRegExp(regex[2], value))
@@ -134,14 +142,17 @@ const validateCustomInput = function (e) {
     testRegExp(regExes.zero, value) ||
     testRegExp(regExes.letter, value)
   ) {
-    setStateStyle(e.target, colors.error, colors.error, colors.error);
+    e.target.classList.add('calc__input--error');
+    // setStateStyle(e.target, colors.error, colors.error, colors.error);
   } else {
     currentTip = value;
     calcTotalAmount(currentTip);
-    setStateStyle(e.target, colors.primary, colors.success, colors.success);
+    e.target.classList.remove('calc__input--error');
+    // setStateStyle(e.target, colors.primary, colors.success, colors.success);
   }
 
-  value === '' && (e.target.style.outline = '0');
+  value === '' && e.target.classList.remove('calc__input--error');
+  // value === '' && (e.target.style.outline = '0');
 
   resetBtn.removeAttribute('disabled');
 
@@ -149,7 +160,7 @@ const validateCustomInput = function (e) {
 };
 
 resetBtn.addEventListener('click', resetAll);
-document.addEventListener('click', setInputOutline);
+// document.addEventListener('click', setInputOutline);
 listItems.forEach((item) =>
   item.addEventListener('click', setPercentageBtnsState)
 );

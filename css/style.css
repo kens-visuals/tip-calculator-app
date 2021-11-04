@@ -144,6 +144,11 @@ body {
     cursor: pointer; }
     .calc__input:focus-visible {
       outline: 0.2rem solid #26c0ab; }
+    .calc__input--error {
+      color: #c47868;
+      caret-color: #c47868; }
+      .calc__input--error:focus-visible {
+        outline: 0.2rem solid #c47868; }
   .calc__list {
     list-style: none;
     margin-top: 1rem;
