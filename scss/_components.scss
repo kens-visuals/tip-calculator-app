@@ -156,26 +156,30 @@
     }
   }
 
-  &__item {
+  &__btn {
+    width: 100%;
+    height: 100%;
     color: $color-secondary;
     background-color: $color-primary;
-    border-radius: 0.5rem;
     font-size: 2.5rem;
+    border: 0;
+    border-radius: 0.5rem;
     padding-block: 0.1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     transition: all 0.4s;
+
+    &--active {
+      color: $color-primary;
+      background-color: $color-success;
+    }
+
+    &:focus-visible {
+      outline: 0.3rem solid $color-success;
+    }
 
     &:hover {
       cursor: pointer;
       color: $color-primary;
       background-color: $color-hover;
-    }
-
-    &--active {
-      color: $color-primary;
-      background-color: $color-success;
     }
   }
 

@@ -2,7 +2,7 @@ let currentTip = 0;
 
 const resetBtn = document.querySelector('.js-reset');
 const inputs = document.querySelectorAll('.js-input');
-const listItems = document.querySelectorAll('.js-item');
+const percentBtn = document.querySelectorAll('.js-btn');
 const amountNumbers = document.querySelectorAll('.js-number');
 const errorTexts = document.querySelectorAll('.js-error-text');
 const percentageBtns = document.querySelectorAll('.js-percentage');
@@ -18,60 +18,30 @@ const regExes = {
   letter: /[a-zA-Z,/<>\?;':""[\]\\{}\|`~!@#\$%\^&\*()_=\+]+/g,
 };
 
-const colors = {
-  primary: 'hsl(183, 100%, 15%)',
-  success: 'hsl(172, 67%, 45%)',
-  error: 'hsl(10, 44%, 59%)',
-};
-
 const testRegExp = (regex, val) => new RegExp(regex).test(val);
 
 const removeBtnActiveClass = () =>
-  listItems.forEach((item) => item.classList.remove('calc__item--active'));
-
-// const setStateStyle = (input, ...colors) => {
-//   const [color, caretColor, outlineColor] = colors;
-
-//   input.style.color = `${color}`;
-//   input.style.caretColor = `${caretColor}`;
-//   input.style.outline = `0.2rem solid ${outlineColor}`;
-// };
+  percentBtn.forEach((item) => item.classList.remove('calc__btn--active'));
 
 const setErrorState = function (e, msg) {
-  // setStateStyle(e.target, colors.error, colors.error, colors.error);
   e.target.classList.add('calc__input--error');
   e.target.previousElementSibling.lastElementChild.textContent = msg;
 };
 
 const setSuccessState = function (e) {
-  // setStateStyle(e.target, colors.primary, colors.success, colors.success);
   e.target.classList.remove('calc__input--error');
   e.target.previousElementSibling.lastElementChild.textContent = '';
 };
 
-// const setInputOutline = function (e) {
-//   inputs.forEach((input) => {
-//     if (e.target.closest('.js-input')) {
-//       resetBtn.removeAttribute('disabled');
-//       input.style.outline = `0.2rem solid transparent`;
-//       e.target.style.outline = `0.2rem solid ${colors.success}`;
-//     } else {
-//       input.style.outline = `0.2rem solid transparent`;
-//     }
-//   });
-// };
-
 const setPercentageBtnsState = function (e) {
-  listItems.forEach(() => {
+  percentBtn.forEach(() => {
     removeBtnActiveClass();
     customInput.value = '';
     customInput.classList.remove('calc__input--error');
-    // customInput.style.outline = '0';
-    // customInput.style.color = `${colors.primary}`;
     resetBtn.removeAttribute('disabled');
-    e.target.classList.add('calc__item--active');
+    e.target.classList.add('calc__btn--active');
 
-    currentTip = e.target.dataset.percentage;
+    currentTip = e.target.value;
     calcTotalAmount(currentTip);
   });
 };
@@ -84,9 +54,6 @@ const resetAll = function () {
   inputs.forEach((el) => {
     el.value = '';
     el.classList.remove('calc__input--error');
-    // el.style.outline = 0;
-    // el.style.color = `${colors.primary}`;
-    // el.style.caretColor = `${colors.success}`;
   });
   errorTexts.forEach((el) => (el.textContent = ''));
   amountNumbers.forEach((el) => (el.textContent = '$0.00'));
@@ -103,6 +70,9 @@ const calcTotalAmount = (tipPercentage) => {
     totalAmount.textContent = `$${calcTotalPerPerson.toFixed(2)}`;
   } else if (bill > 0) {
     totalAmount.textContent = `$${(bill / 1).toFixed(2)}`;
+  } else if (bill === '' || people === '') {
+    tipAmount.textContent = `$0.00`;
+    totalAmount.textContent = `$0.00`;
   }
 };
 
@@ -143,16 +113,13 @@ const validateCustomInput = function (e) {
     testRegExp(regExes.letter, value)
   ) {
     e.target.classList.add('calc__input--error');
-    // setStateStyle(e.target, colors.error, colors.error, colors.error);
   } else {
     currentTip = value;
     calcTotalAmount(currentTip);
     e.target.classList.remove('calc__input--error');
-    // setStateStyle(e.target, colors.primary, colors.success, colors.success);
   }
 
   value === '' && e.target.classList.remove('calc__input--error');
-  // value === '' && (e.target.style.outline = '0');
 
   resetBtn.removeAttribute('disabled');
 
@@ -160,8 +127,7 @@ const validateCustomInput = function (e) {
 };
 
 resetBtn.addEventListener('click', resetAll);
-// document.addEventListener('click', setInputOutline);
-listItems.forEach((item) =>
+percentBtn.forEach((item) =>
   item.addEventListener('click', setPercentageBtnsState)
 );
 
