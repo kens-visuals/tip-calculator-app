@@ -42,6 +42,7 @@
         aria-hidden="true"
         class="calc__logo"
       />
+
       <main class="calc">
         <div class="calc__input-container">
           <form action="#" class="calc__form calc__form--bill">
@@ -55,7 +56,7 @@
               name="bill"
               placeholder="0"
               maxlength="7"
-              id="name"
+              id="bill"
               class="calc__input js-input"
               required
             />
@@ -65,6 +66,7 @@
             <div class="calc__form-texts">
               <p class="calc__heading">Select Tip %</p>
             </div>
+
             <ul class="calc__list">
               <li class="calc__item">
                 <button class="calc__btn js-btn" type="button" value="5">
@@ -92,13 +94,16 @@
                 </button>
               </li>
               <li>
-                <form action="#" class="calc__form calc__form--custom">
+                <form action="#" class="calc__form">
                   <input
                     type="text"
                     name="custom"
                     placeholder="Custom"
                     id="custom"
-                    class="calc__input js-input js-input--custom"
+                    class="
+                      calc__input calc__input--custom
+                      js-input js-input--custom
+                    "
                     required
                   />
                 </form>
@@ -108,11 +113,10 @@
 
           <form action="#" class="calc__form calc__form--nop">
             <div class="calc__form-texts">
-              <label for="number of people" class="calc__heading">
-                Number of People
-              </label>
+              <label for="nop" class="calc__heading"> Number of People </label>
               <p class="calc__error-text js-error-text"></p>
             </div>
+
             <input
               type="text"
               name="number of people"
@@ -124,6 +128,7 @@
             />
           </form>
         </div>
+
         <div class="calc__output-container">
           <div class="calc__output-headings">
             <div class="calc__wrapper">
@@ -142,6 +147,7 @@
               <p class="calc__number js-number">$0.00</p>
             </div>
           </div>
+
           <button
             type="reset"
             value="Reset"

@@ -2,12 +2,12 @@
   width: 100%;
   background-color: $color-secondary--light;
   padding: 4rem 2.5rem;
-  border-top-left-radius: 2rem;
-  border-top-right-radius: 2rem;
+  border-top-left-radius: 2.5rem;
+  border-top-right-radius: 2.5rem;
   box-shadow: rgba($color-primary, 0.25) 0px 15px 40px -5px;
 
   @media (min-width: 810px) {
-    border-radius: 2rem;
+    border-radius: 2.5rem;
   }
 
   @media (min-width: 1140px) {
@@ -71,20 +71,6 @@
         margin-bottom: 0;
       }
     }
-
-    &--custom {
-      width: 100%;
-
-      & input {
-        color: $color-primary;
-        padding-block: 0.8rem;
-
-        @media (min-width: 1140px) {
-          padding-block: 1rem;
-          font-size: 2rem;
-        }
-      }
-    }
   }
 
   &__heading {
@@ -131,6 +117,17 @@
       outline: 0.2rem solid $color-success;
     }
 
+    &--custom {
+      width: 100%;
+      color: $color-primary;
+      padding-block: 0.8rem;
+
+      @media (min-width: 1140px) {
+        padding-block: 1rem;
+        font-size: 2rem;
+      }
+    }
+
     &--error {
       color: $color-error;
       caret-color: $color-error;
@@ -161,7 +158,7 @@
     height: 100%;
     color: $color-secondary;
     background-color: $color-primary;
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     border: 0;
     border-radius: 0.5rem;
     padding-block: 0.1rem;
