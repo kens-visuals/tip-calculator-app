@@ -42,8 +42,8 @@ const setPercentageBtnsState = function (e) {
     removeBtnActiveClass();
     customInput.value = '';
     customInput.classList.remove('calc__input--error');
-    resetBtn.removeAttribute('disabled');
     e.target.classList.add('calc__btn--active');
+    resetBtn.removeAttribute('disabled');
 
     currentTip = e.target.value;
     calcTotalAmount(currentTip);
