@@ -19,7 +19,7 @@ This is a solution to the [Tip Calculator App Challenge on Frontend Mentor](http
 
 ### The challenge
 
-Frontend Mentor's challenges
+**Frontend Mentor's challenges**
 
 Users should be able to:
 
@@ -27,7 +27,7 @@ Users should be able to:
 - See hover states for all interactive elements on the page
 - Calculate the correct tip and total cost of the bill per person
 
-Challenges added by me
+**Challenges added by me**
 
 Users should be able to:
 
@@ -67,7 +67,7 @@ I've learned so much with this project, especially in JS. I've got to admit this
 
 > ### iOS
 >
-> 1.  Open Safari
+> 1.  Open Safari and go to [https://kens-visuals.github.io/tip-calculator-app/](https://kens-visuals.github.io/tip-calculator-app/)
 > 2.  Tap the **Share** button on the bottom of the page. It looks like a square with an arrow pointing out of the top.
 > 3.  In the list of options that appear, scroll down and tap on **Add to Home Screen**. The _Add to Home Screen_ dialog box will appear.
 > 4.  Choose a name for the website shortcut on your home screen.
@@ -77,8 +77,8 @@ I've learned so much with this project, especially in JS. I've got to admit this
 > ### Android
 >
 > 1. Open Chrome.
-> 2. Navigate to the website or web page you want to pin to your home screen.
-> 3. Tap the menu icon (3 dots in upper right-hand corner) and tap Add to home screen.
+> 2. Navigate to [https://kens-visuals.github.io/tip-calculator-app/](https://kens-visuals.github.io/tip-calculator-app/) to pin to your home screen.
+> 3. Tap the menu icon (3 dots in upper right-hand corner) and tap **Add to home screen**.
 > 4. Choose a name for the website shortcut, then Chrome will add it to your home screen.
 
 ### Continued development
