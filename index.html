@@ -165,20 +165,114 @@
       </main>
     </div>
 
+    <div class="modal__bg js-modal">
+      <div class="modal js-modal">
+        <button
+          type="button"
+          class="modal__close-btn js-close"
+          aria-label="close"
+        >
+          <img
+            src="./images/icon-close-modal.svg"
+            alt=""
+            aria-hidden="true"
+            class="modal__close-img"
+          />
+        </button>
+
+        <h2 class="modal__heading modal__heading--secondary">
+          How to add the app to home screen
+        </h2>
+
+        <div class="modal__wrapper">
+          <h3 class="modal__heading modal__heading--tertiary">iOS</h3>
+          <ol class="modal__list">
+            <li class="modal__item">
+              Tap the Share button on the bottom of the page. It looks like a
+              square with an arrow pointing out of the top.
+            </li>
+            <li class="modal__item">
+              In the list of options that appear, scroll down and tap on Add to
+              Home Screen. The Add to Home Screen dialog box will appear.
+            </li>
+            <li class="modal__item">
+              Choose a name for the website shortcut on your home screen.
+            </li>
+            <li class="modal__item">
+              Click Add when you're done. Safari will close automatically, and
+              you will be taken to where the icon is located on your iPhone’s or
+              iPad's home screen.
+            </li>
+            <li class="modal__item">
+              Now just tap the new "app" or shortcut on your home screen, and it
+              will open the website in its own navigation window, independent of
+              what you have open in Safari.
+            </li>
+          </ol>
+        </div>
+
+        <div class="modal__wrapper">
+          <h3 class="modal__heading modal__heading--tertiary">Android</h3>
+          <ol class="modal__list">
+            <li class="modal__item">
+              Tap the menu icon (3 dots in upper right-hand corner) and tap Add
+              to home screen.
+            </li>
+            <li class="modal__item">
+              Choose a name for the website shortcut, then Chrome will add it to
+              your home screen.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
     <footer class="attribution">
-      Challenge by
-      <a
-        class="attribution__link"
-        href="https://www.frontendmentor.io?ref=challenge"
-        target="_blank"
-        >Frontend Mentor</a
-      >. Coded by
-      <a
-        class="attribution__link"
-        href="https://github.com/kens-visuals"
-        target="_blank"
-        >Kens-Visuals</a
-      >.
+      <div class="attribution__wrapper">
+        Challenge by
+        <a
+          class="attribution__link"
+          href="https://www.frontendmentor.io?ref=challenge"
+          target="_blank"
+          >Frontend Mentor</a
+        >. Coded by
+        <a
+          class="attribution__link"
+          href="https://github.com/kens-visuals"
+          target="_blank"
+          >Kens-Visuals</a
+        >.
+      </div>
+
+      <button
+        type="button"
+        class="attribution__helper js-helper"
+        aria-label="helper"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="attribution__ionicon js-icon"
+          viewBox="0 0 512 512"
+        >
+          <title>Help Circle</title>
+          <path
+            d="M256 80a176 176 0 10176 176A176 176 0 00256 80z"
+            fill="none"
+            stroke="currentColor"
+            stroke-miterlimit="10"
+            stroke-width="32"
+          />
+          <path
+            d="M200 202.29s.84-17.5 19.57-32.57C230.68 160.77 244 158.18 256 158c10.93-.14 20.69 1.67 26.53 4.45 10 4.76 29.47 16.38 29.47 41.09 0 26-17 37.81-36.37 50.8S251 281.43 251 296"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            stroke-width="28"
+          />
+          <circle cx="250" cy="348" r="20" />
+        </svg>
+      </button>
     </footer>
   </body>
 </html>

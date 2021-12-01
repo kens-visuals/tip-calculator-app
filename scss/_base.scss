@@ -57,7 +57,19 @@ body {
   font-size: 1.6rem;
   font-weight: 700;
   text-rendering: optimizeSpeed;
+  position: relative;
   display: grid;
   grid-template-rows: 1fr auto;
   justify-items: center;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }

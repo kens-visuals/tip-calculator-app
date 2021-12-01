@@ -244,15 +244,113 @@
   }
 }
 
-.sr-only {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+.modal {
+  width: 90%;
+  max-width: 89rem;
+  color: $color-primary;
+  background-color: $color-secondary--light;
+  border-radius: 2.5rem;
+  padding: 2.7rem 4rem;
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s;
+
+  &.is-modal-visible {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  @media (min-width: 810px) {
+    width: 95%;
+    padding: 5.5rem 4rem;
+  }
+
+  @media (min-width: 1140px) {
+    margin-top: 6rem;
+    padding: 4rem 6rem;
+  }
+
+  &__bg {
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color-primary--light, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    transition: all 0.3s;
+
+    &.is-modal-visible {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    @media (min-width: 810px) {
+      padding-top: 8rem;
+      align-items: center;
+    }
+  }
+
+  &__close {
+    &-btn {
+      background: unset;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      position: absolute;
+      top: 3rem;
+      right: 3rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__heading {
+    &--secondary {
+      font-size: clamp(2.3rem, 2vw, 3.5rem);
+      margin: 2rem 0 3rem 0;
+
+      @media (min-width: 810px) {
+        margin-top: 0;
+        margin-bottom: 3rem;
+      }
+    }
+
+    &--tertiary {
+      font-size: clamp(2rem, 2vw, 2.5rem);
+      margin: 3rem 0 2rem 0;
+    }
+  }
+
+  &__list {
+    margin-left: 2.5rem;
+
+    @media (min-width: 810px) {
+      width: 90%;
+      margin-left: 5.5rem;
+    }
+
+    @media (min-width: 1140px) {
+      margin-left: 6.3rem;
+    }
+  }
+
+  &__item {
+    color: $color-primary--dark;
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-weight: normal;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
 }
 
 .attribution {
@@ -262,8 +360,12 @@
   font-size: 0.8rem;
   text-align: center;
   padding-bottom: 3rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
 
   @media (min-width: 810px) {
+    max-width: unset;
     background-color: unset;
     font-size: 1rem;
     margin-block: 1rem;
@@ -280,5 +382,31 @@
   &__link:hover,
   &__link:active {
     color: $color-primary--light;
+  }
+
+  &__wrapper {
+    margin-left: 3rem;
+  }
+
+  &__helper {
+    background: unset;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__ionicon {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 2rem;
+    justify-self: end;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

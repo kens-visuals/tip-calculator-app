@@ -1,6 +1,10 @@
 let currentTip = 0;
 
 const resetBtn = document.querySelector('.js-reset');
+const closeBtn = document.querySelector('.js-close');
+const helperIcon = document.querySelector('.js-icon');
+const helperBtn = document.querySelector('.js-helper');
+const modals = document.querySelectorAll('.js-modal');
 const inputs = document.querySelectorAll('.js-input');
 const percentBtn = document.querySelectorAll('.js-btn');
 const amountNumbers = document.querySelectorAll('.js-number');
@@ -141,6 +145,14 @@ billInput.addEventListener('input', (e) =>
 peopleInput.addEventListener('input', (e) =>
   validateInput(e, regExes.people, regExes.letter, regExes.zero)
 );
+
+closeBtn.addEventListener('click', () => {
+  modals.forEach((modal) => modal.classList.remove('is-modal-visible'));
+});
+
+helperBtn.addEventListener('click', () => {
+  modals.forEach((modal) => modal.classList.add('is-modal-visible'));
+});
 
 window.addEventListener('load', () => {
   resetBtn.setAttribute('disabled', true);
